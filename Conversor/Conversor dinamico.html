@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor Dinâmico</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h2>Conversor Dinâmico</h2>
+        
+        <!-- Seção de cálculo de valor específico -->
+        <div class="calculadora-section">
+            <h3>Calculadora Rápida</h3>
+            <div class="input-group">
+                <input type="number" id="valorInput" placeholder="Digite o valor" step="0.01" min="0">
+                <select id="moedaBaseSelect">
+                    <option value="BRL">BRL - Real</option>
+                    <option value="USD">USD - Dólar</option>
+                    <option value="EUR">EUR - Euro</option>
+                    <option value="CNY">CNY - Yuan</option>
+                    <option value="CAD">CAD - Dólar Canadense</option>
+                    <option value="AUD">AUD - Dólar Australiano</option>
+                    <option value="JPY">JPY - Iene</option>
+                    <option value="GBP">GBP - Libra Esterlina</option>
+                    <option value="ARS">ARS - Peso Argentino</option>
+                    <option value="BTC">BTC - Bitcoin</option>
+                </select>
+                <button id="calcularBtn" class="button">Calcular</button>
+            </div>
+            <div id="resultadoCalculo" class="resultado-calculo"></div>
+        </div>
+        
+        <!-- Seção de gerenciamento de moedas -->
+        <div class="todo-section">
+            <h3>📊 Gerenciar Moedas</h3>
+            <div class="input-group">
+                <input type="text" id="taskInput" placeholder="Código da moeda (Ex: USD, EUR, CNY)">
+                <button id="addTaskBtn" class="button">Adicionar Moeda</button>
+            </div>
+            <div class="moedas-info">
+                <small>Moedas disponíveis: USD, EUR, BRL, CNY, CAD, AUD, JPY, GBP, ARS, BTC</small>
+            </div>
+        </div>
+
+        <!-- Lista de moedas adicionadas -->
+        <div id="taskList" class="todo-list"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
