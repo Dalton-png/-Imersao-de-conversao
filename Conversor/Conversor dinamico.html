@@ -1,53 +1,70 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conversor Dinâmico</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <title>Conversor de Moedas Pro</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-
     <div class="container">
-        <h2>Conversor Dinâmico</h2>
+        <h2>💱 Conversor de Moedas Pro</h2>
         
-        <!-- Seção de cálculo de valor específico -->
+        <!-- Seção da Calculadora -->
         <div class="calculadora-section">
-            <h3>Calculadora Rápida</h3>
+            <h3>Calculadora de Conversão</h3>
             <div class="input-group">
-                <input type="number" id="valorInput" placeholder="Digite o valor" step="0.01" min="0">
+                <input type="number" id="valorInput" placeholder="Valor para converter" min="0" step="0.01">
                 <select id="moedaBaseSelect">
-                    <option value="BRL">BRL - Real</option>
-                    <option value="USD">USD - Dólar</option>
-                    <option value="EUR">EUR - Euro</option>
-                    <option value="CNY">CNY - Yuan</option>
-                    <option value="CAD">CAD - Dólar Canadense</option>
-                    <option value="AUD">AUD - Dólar Australiano</option>
-                    <option value="JPY">JPY - Iene</option>
-                    <option value="GBP">GBP - Libra Esterlina</option>
-                    <option value="ARS">ARS - Peso Argentino</option>
-                    <option value="BTC">BTC - Bitcoin</option>
+                    <option value="">Selecione a moeda base</option>
                 </select>
                 <button id="calcularBtn" class="button">Calcular</button>
             </div>
+            
             <div id="resultadoCalculo" class="resultado-calculo"></div>
         </div>
-        
-        <!-- Seção de gerenciamento de moedas -->
+
+        <!-- Seção de Ações -->
+        <div class="acoes-container" id="acoesContainer"></div>
+
+        <!-- Seção de Adicionar Moedas -->
         <div class="todo-section">
-            <h3>📊 Gerenciar Moedas</h3>
+            <h3>Gerenciar Moedas</h3>
             <div class="input-group">
-                <input type="text" id="taskInput" placeholder="Código da moeda (Ex: USD, EUR, CNY)">
+                <input type="text" id="taskInput" placeholder="Digite o código da moeda (ex: USD, EUR)">
                 <button id="addTaskBtn" class="button">Adicionar Moeda</button>
             </div>
             <div class="moedas-info">
-                <small>Moedas disponíveis: USD, EUR, BRL, CNY, CAD, AUD, JPY, GBP, ARS, BTC</small>
+                <small>Moedas disponíveis: USD, EUR, GBP, JPY, ARS, CAD, AUD, CNY, BTC, BRL, INR, RUB, MXN</small>
+            </div>
+            
+            <div id="taskList" class="todo-list"></div>
+        </div>
+    </div>
+
+    <!-- Botão Modo Escuro -->
+    <div id="modoEscuroToggle" class="modo-escuro-btn">🌙</div>
+
+    <!-- Modal de Histórico -->
+    <div id="modalHistorico" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>📊 Histórico de Conversões</h3>
+            <div id="historicoLista"></div>
+            <button id="limparHistorico" class="button">Limpar Histórico</button>
+        </div>
+    </div>
+
+    <!-- Modal de Gráficos -->
+    <div id="modalGraficos" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>📈 Evolução das Moedas</h3>
+            <div class="grafico-container">
+                <canvas id="graficoEvolucao"></canvas>
             </div>
         </div>
-
-        <!-- Lista de moedas adicionadas -->
-        <div id="taskList" class="todo-list"></div>
     </div>
 
     <script src="script.js"></script>
