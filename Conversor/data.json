@@ -1,302 +1,132 @@
 [
-  {
-    "nome": "Yuan Chinês (Renminbi)",
-    "descricao": "Moeda oficial da República Popular da China, uma das mais influentes no comércio global.",
-    "data_criacao": "1948",
-    "link": "https://conversor.cny.com/cotacoes",
-    "tags": [
-      "Ásia",
-      "Câmbio Controlado",
-      "Comércio Internacional",
-      "Economia Emergente"
-    ]
-  },
-  {
-    "nome": "Dólar Australiano",
-    "descricao": "Moeda da Commonwealth da Austrália, incluindo a Ilha Christmas, Ilhas Cocos (Keeling) e Ilha Norfolk.",
-    "data_criacao": "1966",
-    "link": "https://conversor.aud.com/dinamico",
-    "tags": [
-      "Oceania",
-      "Commodities",
-      "Reserva Estrangeira",
-      "Câmbio Flutuante"
-    ]
-  },
-  {
-    "nome": "Dólar Canadense",
-    "descricao": "Moeda oficial do Canadá, amplamente negociada devido à proximidade e relações comerciais com os EUA.",
-    "data_criacao": "1871",
-    "link": "https://conversor.cad.com/calculadora",
-    "tags": [
-      "América do Norte",
-      "Reservas Globais",
-      "Mercado de Energia",
-      "Câmbio Flutuante"
-    ]
-  },
-  {
-    "nome": "Real Brasileiro",
-    "descricao": "A moeda corrente do Brasil, introduzida para estabilizar a economia e combater a hiperinflação.",
-    "data_criacao": "1994",
-    "link": "https://conversor.brl.com/taxas",
-    "tags": [
-      "América do Sul",
-      "Economia Emergente",
-      "Inflação",
-      "Banco Central"
-    ]
-  },
-  {
-    "nome": "Rupia Indiana",
-    "descricao": "Moeda oficial da Índia, uma das maiores economias emergentes do mundo.",
-    "data_criacao": "1957",
-    "link": "https://conversor.inr.com/historico",
-    "tags": [
-      "Subcontinente Indiano",
-      "População",
-      "Comércio Regional",
-      "Controle de Capital"
-    ]
-  },
-  {
-    "nome": "Rublo Russo",
-    "descricao": "Moeda da Federação Russa, sujeita a grandes flutuações devido à geopolítica e preços de energia.",
-    "data_criacao": "1998",
-    "link": "https://conversor.rub.com/analise",
-    "tags": [
-      "Leste Europeu",
-      "Commodities",
-      "Geopolítica",
-      "Sanções"
-    ]
-  },
-  {
-    "nome": "Peso Mexicano",
-    "descricao": "Moeda oficial do México, uma das moedas mais negociadas da América Latina.",
-    "data_criacao": "1993",
-    "link": "https://conversor.mxn.com/tempo-real",
-    "tags": [
-      "América Latina",
-      "Remessas",
-      "Reservas Globais",
-      "Câmbio Flutuante"
-    ]
-  },
-  {
-    "nome": "Rand Sul-Africano",
-    "descricao": "Moeda da África do Sul, servindo como moeda de referência para a Área de Moeda Comum da África Austral.",
-    "data_criacao": "1961",
-    "link": "https://conversor.zar.com/ferramenta",
-    "tags": [
-      "África",
-      "Metais Preciosos",
-      "Economia Emergente",
-      "Volatilidade"
-    ]
-  },
-  {
-    "nome": "Dólar Neozelandês",
-    "descricao": "Moeda da Nova Zelândia, altamente dependente da agricultura e do turismo.",
-    "data_criacao": "1967",
-    "link": "https://conversor.nzd.com/cotacao",
-    "tags": [
-      "Oceania",
-      "Agricultura",
-      "Câmbio Flutuante",
-      "Exportação"
-    ]
-  },
-  {
-    "nome": "Won Sul-Coreano",
-    "descricao": "Moeda da Coreia do Sul, país com uma das maiores e mais avançadas economias de tecnologia do mundo.",
-    "data_criacao": "1962",
-    "link": "https://conversor.krw.com/taxa-dia",
-    "tags": [
-      "Ásia Oriental",
-      "Tecnologia",
-      "Exportação",
-      "Relações Comerciais"
-    ]
-  },
-  {
-    "nome": "Dólar de Singapura",
-    "descricao": "Moeda de Singapura, um grande centro financeiro e de comércio internacional na Ásia.",
-    "data_criacao": "1967",
-    "link": "https://conversor.sgd.com/info",
-    "tags": [
-      "Sudeste Asiático",
-      "Centro Financeiro",
-      "Comércio",
-      "Estabilidade"
-    ]
-  },
-  {
-    "nome": "Coroa Sueca",
-    "descricao": "Moeda oficial da Suécia. Embora seja membro da UE, a Suécia manteve sua própria moeda.",
-    "data_criacao": "1873",
-    "link": "https://conversor.sek.com/banco-central",
-    "tags": [
-      "Escandinávia",
-      "União Europeia",
-      "Moedas Desenvolvidas",
-      "Taxa de Juros"
-    ]
-  },
-  {
-    "nome": "Lira Turca",
-    "descricao": "Moeda da Turquia, conhecida por sua alta volatilidade e episódios de inflação elevada.",
-    "data_criacao": "2005",
-    "link": "https://conversor.try.com/calculo",
-    "tags": [
-      "Oriente Médio",
-      "Volatilidade",
-      "Inflação",
-      "Geopolítica"
-    ]
-  },
-  {
-    "nome": "Riyal Saudita",
-    "descricao": "Moeda da Arábia Saudita, atrelada ao Dólar Americano e crucial para o mercado global de petróleo.",
-    "data_criacao": "1935",
-    "link": "https://conversor.sar.com/cambio",
-    "tags": [
-      "Oriente Médio",
-      "Petróleo",
-      "Peg Cambial",
-      "Riqueza"
-    ]
-  },
-  {
-    "nome": "Peso Argentino",
-    "descricao": "Moeda da Argentina, historicamente marcada por crises econômicas, hiperinflação e desvalorizações.",
-    "data_criacao": "1992",
-    "link": "https://conversor.ars.com/crise",
-    "tags": [
-      "América do Sul",
-      "Hiperinflação",
-      "Controle de Capital",
-      "Crise Fiscal"
-    ]
-  },
-  {
-    "nome": "Peso Chileno",
-    "descricao": "Moeda do Chile, um dos países com maior estabilidade econômica e política da América do Sul.",
-    "data_criacao": "1975",
-    "link": "https://conversor.clp.com/investimento",
-    "tags": [
-      "América do Sul",
-      "Mineração",
-      "Estabilidade Econômica",
-      "Câmbio Flutuante"
-    ]
-  },
-  {
-    "nome": "Shekel Israelense",
-    "descricao": "Moeda de Israel, notável por sua resiliência e forte economia de alta tecnologia.",
-    "data_criacao": "1986",
-    "link": "https://conversor.ils.com/tech",
-    "tags": [
-      "Oriente Médio",
-      "Inovação",
-      "Alta Tecnologia",
-      "Mercado Desenvolvido"
-    ]
-  },
-  {
-    "nome": "Zloty Polonês",
-    "descricao": "Moeda oficial da Polônia. O país é o sexto maior da UE em PIB e não adotou o Euro.",
-    "data_criacao": "1995",
-    "link": "https://conversor.pln.com/europeu",
-    "tags": [
-      "Europa Oriental",
-      "União Europeia",
-      "Crescimento Rápido",
-      "Estabilidade"
-    ]
-  },
-  {
-    "nome": "Baht Tailandês",
-    "descricao": "Moeda da Tailândia, uma economia do Sudeste Asiático altamente dependente do turismo e exportações.",
-    "data_criacao": "1928",
-    "link": "https://conversor.thb.com/turismo",
-    "tags": [
-      "Sudeste Asiático",
-      "Turismo",
-      "Exportação",
-      "Banco Central"
-    ]
-  },
-  {
-    "nome": "Coroa Norueguesa",
-    "descricao": "Moeda da Noruega. Sua força está ligada ao preço do petróleo e ao Fundo Soberano de Riqueza.",
-    "data_criacao": "1875",
-    "link": "https://conversor.nok.com/petroleo",
-    "tags": [
-      "Escandinávia",
-      "Petróleo",
-      "Fundo Soberano",
-      "Riqueza"
-    ]
-  },
-  {
-    "nome": "Ringgit Malaio",
-    "descricao": "Moeda oficial da Malásia, um importante centro de exportação de eletrônicos e produtos de borracha.",
-    "data_criacao": "1993",
-    "link": "https://conversor.myr.com/malaio",
-    "tags": [
-      "Sudeste Asiático",
-      "Comércio",
-      "Exportação",
-      "Emergente"
-    ]
-  },
-  {
-    "nome": "Dólar de Hong Kong",
-    "descricao": "Moeda de Hong Kong. Está atrelada a uma banda de flutuação em relação ao Dólar Americano.",
-    "data_criacao": "1983",
-    "link": "https://conversor.hkd.com/financeiro",
-    "tags": [
-      "Ásia",
-      "Peg Cambial",
-      "Centro Financeiro",
-      "Mercado Livre"
-    ]
-  },
-  {
-    "nome": "Rupia Indonésia",
-    "descricao": "Moeda da Indonésia. Uma das moedas com o menor valor nominal devido à alta inflação histórica.",
-    "data_criacao": "1946",
-    "link": "https://conversor.idr.com/economia",
-    "tags": [
-      "Sudeste Asiático",
-      "População",
-      "Volatilidade",
-      "Taxa de Câmbio"
-    ]
-  },
-  {
-    "nome": "Coroa Dinamarquesa",
-    "descricao": "Moeda da Dinamarca, membro da UE com uma política de câmbio semi-fixa em relação ao Euro.",
-    "data_criacao": "1875",
-    "link": "https://conversor.dkk.com/ue",
-    "tags": [
-      "Escandinávia",
-      "Política Monetária",
-      "Estabilidade",
-      "Semi-fixa"
-    ]
-  },
-  {
-    "nome": "Peso Colombiano",
-    "descricao": "Moeda da Colômbia. A economia é impulsionada pela produção de petróleo e café.",
-    "data_criacao": "1810",
-    "link": "https://conversor.cop.com/cafe",
-    "tags": [
-      "América do Sul",
-      "Exportação",
-      "Petróleo",
-      "Câmbio Flutuante"
-    ]
-  }
+    {
+        "codigo": "CNY",
+        "nome": "Yuan Chinês (Renminbi)",
+        "descricao": "Moeda oficial da República Popular da China, uma das mais influentes no comércio global.",
+        "data_criacao": "1948",
+        "valor": 0.75,
+        "simbolo": "¥",
+        "pais": "China",
+        "tags": ["Ásia", "Câmbio Controlado", "Comércio Internacional", "Economia Emergente"]
+    },
+    {
+        "codigo": "AUD", 
+        "nome": "Dólar Australiano",
+        "descricao": "Moeda da Commonwealth da Austrália, incluindo a Ilha Christmas, Ilhas Cocos (Keeling) e Ilha Norfolk.",
+        "data_criacao": "1966",
+        "valor": 3.60,
+        "simbolo": "A$",
+        "pais": "Austrália",
+        "tags": ["Oceania", "Commodities", "Reserva Estrangeira", "Câmbio Flutuante"]
+    },
+    {
+        "codigo": "CAD",
+        "nome": "Dólar Canadense", 
+        "descricao": "Moeda oficial do Canadá, amplamente negociada devido à proximidade e relações comerciais com os EUA.",
+        "data_criacao": "1871",
+        "valor": 4.05,
+        "simbolo": "C$", 
+        "pais": "Canadá",
+        "tags": ["América do Norte", "Reservas Globais", "Mercado de Energia", "Câmbio Flutuante"]
+    },
+    {
+        "codigo": "BRL",
+        "nome": "Real Brasileiro",
+        "descricao": "A moeda corrente do Brasil, introduzida para estabilizar a economia e combater a hiperinflação.",
+        "data_criacao": "1994", 
+        "valor": 1,
+        "simbolo": "R$",
+        "pais": "Brasil",
+        "tags": ["América do Sul", "Economia Emergente", "Inflação", "Banco Central"]
+    },
+    {
+        "codigo": "INR",
+        "nome": "Rupia Indiana",
+        "descricao": "Moeda oficial da Índia, uma das maiores economias emergentes do mundo.",
+        "data_criacao": "1957",
+        "valor": 0.054,
+        "simbolo": "₹",
+        "pais": "Índia",
+        "tags": ["Subcontinente Indiano", "População", "Comércio Regional", "Controle de Capital"]
+    },
+    {
+        "codigo": "RUB",
+        "nome": "Rublo Russo",
+        "descricao": "Moeda da Federação Russa, sujeita a grandes flutuações devido à geopolítica e preços de energia.",
+        "data_criacao": "1998",
+        "valor": 0.055,
+        "simbolo": "₽",
+        "pais": "Rússia",
+        "tags": ["Leste Europeu", "Commodities", "Geopolítica", "Sanções"]
+    },
+    {
+        "codigo": "MXN",
+        "nome": "Peso Mexicano",
+        "descricao": "Moeda oficial do México, uma das moedas mais negociadas da América Latina.",
+        "data_criacao": "1993",
+        "valor": 0.29,
+        "simbolo": "$",
+        "pais": "México",
+        "tags": ["América Latina", "Remessas", "Reservas Globales", "Câmbio Flutuante"]
+    },
+    {
+        "codigo": "JPY",
+        "nome": "Iene Japonês",
+        "descricao": "Moeda do Japão, terceira mais negociada no mercado de câmbio após o dólar americano e euro.",
+        "data_criacao": "1871",
+        "valor": 0.037,
+        "simbolo": "¥",
+        "pais": "Japão",
+        "tags": ["Ásia", "Tecnologia", "Exportação", "Deflação"]
+    },
+    {
+        "codigo": "GBP",
+        "nome": "Libra Esterlina",
+        "descricao": "Moeda do Reino Unido, a mais antiga ainda em uso e quarta mais negociada no mundo.",
+        "data_criacao": "1694",
+        "valor": 7.20,
+        "simbolo": "£",
+        "pais": "Reino Unido",
+        "tags": ["Europa", "Histórica", "Reserva", "Brexit"]
+    },
+    {
+        "codigo": "USD",
+        "nome": "Dólar Americano",
+        "descricao": "Principal moeda de reserva internacional, utilizada como padrão em transações globais.",
+        "data_criacao": "1792",
+        "valor": 5.50,
+        "simbolo": "US$",
+        "pais": "Estados Unidos",
+        "tags": ["Global", "Reserva", "Petróleo", "Hegemonia"]
+    },
+    {
+        "codigo": "EUR",
+        "nome": "Euro",
+        "descricao": "Moeda oficial da Zona do Euro, segunda maior moeda de reserva internacional.",
+        "data_criacao": "1999",
+        "valor": 6.00,
+        "simbolo": "€",
+        "pais": "União Europeia",
+        "tags": ["Europa", "Integração", "Reserva", "Estabilidade"]
+    },
+    {
+        "codigo": "ARS",
+        "nome": "Peso Argentino",
+        "descricao": "Moeda da Argentina, historicamente marcada por crises econômicas e desvalorizações.",
+        "data_criacao": "1992",
+        "valor": 0.006,
+        "simbolo": "ARS$",
+        "pais": "Argentina",
+        "tags": ["América do Sul", "Hiperinflação", "Controle de Capital", "Crise Fiscal"]
+    },
+    {
+        "codigo": "BTC",
+        "nome": "Bitcoin",
+        "descricao": "Primeira criptomoeda descentralizada, operando sem uma autoridade central ou bancos.",
+        "data_criacao": "2009",
+        "valor": 350000,
+        "simbolo": "₿",
+        "pais": "Global",
+        "tags": ["Criptomoeda", "Blockchain", "Descentralizado", "Volátil"]
+    }
 ]
