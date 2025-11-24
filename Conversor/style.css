@@ -4,20 +4,22 @@
     margin: 0;
     padding: 0;
     font-family: 'Inter', 'Roboto', sans-serif;
+    transition: all 0.3s ease-in-out;
 }
 
 body {
-    background-color: #f8f9fa;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     display: flex;
     justify-content: center;
     align-items: flex-start;
     min-height: 100vh;
-    padding-top: 50px;
+    padding: 20px;
+    color: #333;
 }
 
 /* 2. CONTAINER PRINCIPAL */
 .container {
-    max-width: 600px;
+    max-width: 800px;
     width: 90%;
     margin: 0 auto;
     padding: 30px;
@@ -33,7 +35,7 @@ h2 {
     font-size: 28px;
 }
 
-/* 3. SEÇÃO DA CALCULADORA - COM SUA COR #d8523d */
+/* 3. SEÇÃO DA CALCULADORA */
 .calculadora-section {
     background: linear-gradient(45deg, #e86a55, #d8523d);
     padding: 20px;
@@ -151,7 +153,7 @@ input[type="text"]:focus, input[type="number"]:focus {
     border-color: #d8523d;
 }
 
-/* 7. BOTÃO COM SUA COR #d8523d */
+/* 7. BOTÃO */
 .button {
     padding: 12px 25px;
     border: none;
@@ -170,14 +172,138 @@ input[type="text"]:focus, input[type="number"]:focus {
     box-shadow: 0 6px 12px rgba(216, 82, 61, 0.25);
 }
 
-/* 8. CARDS DE MOEDA */
+/* 8. CARDS DE MOEDA COM CORES ESPECÍFICAS */
 .moeda-card {
     background: white;
     padding: 20px;
     margin-bottom: 15px;
     border-radius: 10px;
-    border-left: 5px solid #d8523d;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    animation: fadeInUp 0.6s ease-out;
+    position: relative;
+    overflow: hidden;
+}
+
+.moeda-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    transition: left 0.5s;
+}
+
+.moeda-card:hover::before {
+    left: 100%;
+}
+
+/* Cores específicas para cada moeda */
+.moeda-card[data-currency="USD"] {
+    border-left: 5px solid #3498db;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e3f2fd 100%);
+}
+
+.moeda-card[data-currency="EUR"] {
+    border-left: 5px solid #9b59b6;
+    background: linear-gradient(135deg, #f8f9fa 0%, #f3e5f5 100%);
+}
+
+.moeda-card[data-currency="GBP"] {
+    border-left: 5px solid #e74c3c;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffebee 100%);
+}
+
+.moeda-card[data-currency="JPY"] {
+    border-left: 5px solid #e67e22;
+    background: linear-gradient(135deg, #f8f9fa 0%, #fff3e0 100%);
+}
+
+.moeda-card[data-currency="ARS"] {
+    border-left: 5px solid #2ecc71;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e8f5e8 100%);
+}
+
+.moeda-card[data-currency="CAD"] {
+    border-left: 5px solid #34495e;
+    background: linear-gradient(135deg, #f8f9fa 0%, #eceff1 100%);
+}
+
+.moeda-card[data-currency="AUD"] {
+    border-left: 5px solid #f1c40f;
+    background: linear-gradient(135deg, #f8f9fa 0%, #fffde7 100%);
+}
+
+.moeda-card[data-currency="CNY"] {
+    border-left: 5px solid #c0392b;
+    background: linear-gradient(135deg, #f8f9fa 0%, #fbe9e7 100%);
+}
+
+.moeda-card[data-currency="BTC"] {
+    border-left: 5px solid #f39c12;
+    background: linear-gradient(135deg, #f8f9fa 0%, #fff3e0 100%);
+}
+
+.moeda-card[data-currency="BRL"] {
+    border-left: 5px solid #27ae60;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e8f5e9 100%);
+}
+
+.moeda-card[data-currency="INR"] {
+    border-left: 5px solid #FF9933;
+    background: linear-gradient(135deg, #f8f9fa 0%, #fff3e0 100%);
+}
+
+.moeda-card[data-currency="RUB"] {
+    border-left: 5px solid #D52B1E;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffebee 100%);
+}
+
+.moeda-card[data-currency="MXN"] {
+    border-left: 5px solid #006847;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e8f5e9 100%);
+}
+
+/* Efeitos hover para cada moeda */
+.moeda-card[data-currency]:hover {
+    transform: translateY(-5px);
+}
+
+.moeda-card[data-currency="USD"]:hover {
+    box-shadow: 0 8px 25px rgba(52, 152, 219, 0.3);
+}
+
+.moeda-card[data-currency="EUR"]:hover {
+    box-shadow: 0 8px 25px rgba(155, 89, 182, 0.3);
+}
+
+.moeda-card[data-currency="GBP"]:hover {
+    box-shadow: 0 8px 25px rgba(231, 76, 60, 0.3);
+}
+
+.moeda-card[data-currency="JPY"]:hover {
+    box-shadow: 0 8px 25px rgba(230, 126, 34, 0.3);
+}
+
+.moeda-card[data-currency="ARS"]:hover {
+    box-shadow: 0 8px 25px rgba(46, 204, 113, 0.3);
+}
+
+.moeda-card[data-currency="CAD"]:hover {
+    box-shadow: 0 8px 25px rgba(52, 73, 94, 0.3);
+}
+
+.moeda-card[data-currency="AUD"]:hover {
+    box-shadow: 0 8px 25px rgba(241, 196, 15, 0.3);
+}
+
+.moeda-card[data-currency="CNY"]:hover {
+    box-shadow: 0 8px 25px rgba(192, 57, 43, 0.3);
+}
+
+.moeda-card[data-currency="BTC"]:hover {
+    box-shadow: 0 8px 25px rgba(243, 156, 18, 0.3);
 }
 
 .moeda-header {
@@ -190,27 +316,40 @@ input[type="text"]:focus, input[type="number"]:focus {
 .moeda-titulo {
     font-size: 18px;
     font-weight: bold;
-    color: #d8523d;
+    color: #2c3e50;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .moeda-titulo small {
-    color: #666;
+    color: #929292;
     font-weight: normal;
     font-size: 14px;
+}
+
+/* Ícones com cores das moedas */
+.moeda-icon {
+    font-size: 2rem;
+    transition: transform 0.3s ease;
+}
+
+.moeda-card:hover .moeda-icon {
+    transform: scale(1.1);
 }
 
 /* 9. INFORMAÇÕES DETALHADAS DAS MOEDAS */
 .moeda-info {
     margin: 15px 0;
     padding: 15px;
-    background: #f8f9fa;
+    background: rgba(255, 255, 255, 0.7);
     border-radius: 8px;
-    border: 1px solid #e9ecef;
+    border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .moeda-descricao {
     font-size: 14px;
-    color: #555;
+    color: #2c3e50;
     margin-bottom: 12px;
     line-height: 1.5;
 }
@@ -223,7 +362,7 @@ input[type="text"]:focus, input[type="number"]:focus {
 }
 
 .tag {
-    background: #e9ecef;
+    background: rgba(233, 236, 239, 0.8);
     padding: 4px 10px;
     border-radius: 15px;
     font-size: 11px;
@@ -241,23 +380,24 @@ input[type="text"]:focus, input[type="number"]:focus {
 /* 10. GRID DE CONVERSÕES */
 .conversoes-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 10px;
     margin-top: 15px;
 }
 
 .conversao-item {
-    padding: 10px;
-    background: #f8f9fa;
-    border-radius: 6px;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 8px;
     text-align: center;
-    border: 1px solid #e9ecef;
-    transition: transform 0.2s;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
 }
 
 .conversao-item:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    background: white;
 }
 
 .conversao-item div {
@@ -292,13 +432,287 @@ input[type="text"]:focus, input[type="number"]:focus {
     text-align: center;
     padding: 20px;
     grid-column: 1 / -1;
-    background: #f8f9fa;
+    background: rgba(248, 249, 250, 0.7);
     border-radius: 8px;
 }
 
+/* ===== MODO ESCURO ===== */
+body.modo-escuro {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    color: #ecf0f1;
+}
+
+body.modo-escuro .container {
+    background-color: #04312d;
+    color: #ecf0f1;
+}
+
+body.modo-escuro .todo-section {
+    background: #34495e;
+    border-left-color: #e74c3c;
+}
+
+body.modo-escuro .moeda-card {
+    background: #34495e;
+    color: #ecf0f1;
+}
+
+body.modo-escuro .moeda-info {
+    background: rgba(52, 73, 94, 0.8);
+    border-color: #f2f3f3;
+}
+
+body.modo-escuro .moeda-descricao {
+    color: #f1efef;
+}
+
+body.modo-escuro .conversao-item {
+    background: rgba(52, 73, 94, 0.7);
+    border-color: #ffffff;
+    color: #ecf0f1;
+}
+
+body.modo-escuro input,
+body.modo-escuro select {
+    background: #34495e;
+    border-color: #fcfcfc;
+    color: #ecf0f1;
+}
+
+body.modo-escuro .moeda-titulo {
+    color: #ecf0f1;
+}
+
+.modo-escuro-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #d8523d;
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.5rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.modo-escuro-btn:hover {
+    transform: scale(1.1);
+}
+
+/* ===== MODAIS ===== */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    animation: fadeIn 0.3s;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 30px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 800px;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+body.modo-escuro .modal-content {
+    background-color: #2c3e50;
+    color: #ecf0f1;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+    top: 15px;
+}
+
+.close:hover {
+    color: #d8523d;
+}
+
+/* ===== BOTÕES DE AÇÃO ===== */
+.acoes-container {
+    display: flex;
+    gap: 10px;
+    margin: 15px 0;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.acao-btn {
+    background: linear-gradient(45deg, #3498db, #2980b9);
+    border: none;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.acao-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+}
+
+.acao-btn.historico {
+    background: linear-gradient(45deg, #9b59b6, #8e44ad);
+}
+
+.acao-btn.graficos {
+    background: linear-gradient(45deg, #e67e22, #d35400);
+}
+
+.acao-btn.atualizar {
+    background: linear-gradient(45deg, #27ae60, #2ecc71);
+}
+
+/* ===== HISTÓRICO ===== */
+.historico-item {
+    background: #f8f9fa;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border-left: 4px solid #3498db;
+    animation: fadeInUp 0.5s ease-out;
+}
+
+body.modo-escuro .historico-item {
+    background: #34495e;
+     color: #ecf0f1;
+}
+
+.historico-data {
+    font-size: 12px;
+    color: #7f8c8d;
+    margin-bottom: 5px;
+}
+
+.historico-conversao {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* ===== GRÁFICOS ===== */
+.grafico-container {
+    width: 100%;
+    height: 400px;
+    margin: 20px 0;
+}
+
+/* ===== FAVORITOS ===== */
+.favorito-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 5px;
+}
+
+.favorito-btn.ativo {
+    color: #e74c3c;
+    transform: scale(1.2);
+}
+
+/* ===== LOADING ===== */
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #d8523d;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ===== NOTIFICAÇÕES ===== */
+.notificacao {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #27ae60;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    z-index: 3000;
+    animation: slideInRight 0.3s ease-out;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Animações */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(-10px); }
     to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.value-changing {
+    animation: pulse 0.6s ease-in-out;
 }
 
 /* 13. RESPONSIVIDADE */
@@ -334,4 +748,99 @@ input[type="text"]:focus, input[type="number"]:focus {
     .moeda-tags {
         justify-content: center;
     }
+    
+    .moeda-icon {
+        font-size: 1.5rem;
+    }
+    
+    .acoes-container {
+        flex-direction: column;
+    }
+    
+    .acao-btn {
+        justify-content: center;
+    }
+}/* ===== CORES PERSONALIZADAS - ADICIONE ESTE CÓDIGO ===== */
+
+/* 1. TÍTULO PRINCIPAL */
+h2 {
+    color: #d8523d; /* Vermelho do seu tema - MUDE AQUI */
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 28px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    background: linear-gradient(45deg, #d8523d, #e86a55);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* 2. SEÇÃO DE AÇÕES */
+.acoes-container {
+    display: flex;
+    gap: 10px;
+    margin: 15px 0;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* MUDE AQUI */
+    border-radius: 12px;
+    border-left: 4px solid #d8523d; /* MUDE AQUI A COR DA BORDA */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    color: white;
+}
+
+/* 3. TÍTULO DA SEÇÃO DE MOEDAS */
+.todo-section h3 {
+    color: #d8523d; /* MUDE AQUI */
+    margin-bottom: 15px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* 4. BOTÕES DE AÇÃO COM CORES COMBINANDO */
+.acao-btn {
+    background: linear-gradient(45deg, #3498db, #2980b9);
+    border: none;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.acao-btn.historico {
+    background: linear-gradient(45deg, #9b59b6, #8e44ad);
+}
+
+.acao-btn.graficos {
+    background: linear-gradient(45deg, #e67e22, #d35400);
+}
+
+.acao-btn.atualizar {
+    background: linear-gradient(45deg, #27ae60, #2ecc71);
+}
+h2 {
+    color: #27ae60;
+    background: linear-gradient(45deg, #27ae60, #2ecc71);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;      
+}
+
+.acoes-container {
+    background: linear-gradient(45deg, #27ae60, #2ecc71);
+    border-left: 4px solid #d8523d;
+}
+.todo-section h3 {
+    color: #27ae60;
+} 
+.acao-btn {
+    background: linear-gradient(45deg, #27ae60, #2ecc71);
 }
