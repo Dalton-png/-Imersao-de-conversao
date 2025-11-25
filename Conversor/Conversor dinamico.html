@@ -32,8 +32,8 @@
         <div class="todo-section">
             <h3>Gerenciar Moedas</h3>
             <div class="input-group">
-                <input type="text" id="taskInput" placeholder="Digite o código da moeda (ex: USD, EUR)">
-                <button id="addTaskBtn" class="button">Adicionar Moeda</button>
+                <input type="text" id="taskInput" placeholder="Digite o código da moeda (ex: USD, EUR)" aria-label="Código da moeda">
+                <button id="addTaskBtn" class="button" aria-label="Adicionar moeda">Adicionar Moeda</button>
             </div>
             <div class="moedas-info">
                 <small>Moedas disponíveis: USD, EUR, GBP, JPY, ARS, CAD, AUD, CNY, BTC, BRL, INR, RUB, MXN</small>
@@ -44,15 +44,15 @@
     </div>
 
     <!-- Botão Modo Escuro -->
-    <div id="modoEscuroToggle" class="modo-escuro-btn">🌙</div>
+    <button id="modoEscuroToggle" class="modo-escuro-btn" aria-label="Alternar modo escuro">🌙</button>
 
     <!-- Modal de Histórico -->
     <div id="modalHistorico" class="modal">
         <div class="modal-content">
-            <span class="close">&times;</span>
+            <button class="close" aria-label="Fechar modal">&times;</button>
             <h3>📊 Histórico de Conversões</h3>
             <div id="historicoLista"></div>
-            <button id="limparHistorico" class="button">Limpar Histórico</button>
+            <button id="limparHistorico" class="button" aria-label="Limpar histórico">Limpar Histórico</button>
         </div>
     </div>
 
@@ -67,6 +67,8 @@
         </div>
     </div>
 
+    <!-- Toast container for non-blocking notifications -->
+    <div id="toastContainer" aria-live="polite" class="toast-container"></div>
     <script src="script.js"></script>
 </body>
 </html>
