@@ -2,6 +2,7 @@
 let moedasData = {};
 let moedasSelecionadas = [];
 let todasMoedas = [];
+let prevRenderKey = '';
 let historicoConversao = JSON.parse(localStorage.getItem('historicoConversao')) || [];
 let moedasFavoritas = JSON.parse(localStorage.getItem('moedasFavoritas')) || [];
 let modoEscuro = JSON.parse(localStorage.getItem('modoEscuro')) || false;
@@ -175,10 +176,10 @@ const dadosMoedasCompletos = [
 ];
 
 // Carregar dados das moedas
-function carregarDadosMoedas() {
+function carregarDadosMoedas(externalData) {
     try {
-        todasMoedas = dadosMoedasCompletos;
-        
+        todasMoedas = (externalData && Array.isArray(externalData)) ? externalData : dadosMoedasCompletos;
+
         // Converter para o formato que o conversor precisa
         todasMoedas.forEach(moeda => {
             moedasData[moeda.codigo] = {
@@ -191,15 +192,15 @@ function carregarDadosMoedas() {
                 tags: moeda.tags
             };
         });
-        
+
         console.log('Dados das moedas carregados:', moedasData);
         popularSelectMoedas();
-        
+
         // Inicializar com moedas padrão
         moedasSelecionadas = ['USD', 'EUR', 'BRL'];
         renderizarTarefas();
         criarBotoesAcoes();
-        
+
     } catch (error) {
         console.error('Erro ao carregar dados:', error);
     }
@@ -219,13 +220,13 @@ function popularSelectMoedas() {
 // Criar botões de ações
 function criarBotoesAcoes() {
     acoesContainer.innerHTML = `
-        <button class="button acao-btn historico" onclick="abrirModal('historico')">
+        <button class="button acao-btn historico" onclick="abrirModal('historico')" aria-label="Abrir histórico" tabindex="0">
             📊 Histórico
         </button>
-        <button class="button acao-btn graficos" onclick="abrirModal('graficos')">
+        <button class="button acao-btn graficos" onclick="abrirModal('graficos')" aria-label="Abrir gráficos" tabindex="0">
             📈 Gráficos
         </button>
-        <button class="button acao-btn atualizar" onclick="buscarCotacoesTempoReal()">
+        <button class="button acao-btn atualizar" onclick="buscarCotacoesTempoReal()" aria-label="Atualizar cotações" tabindex="0">
             🔄 Atualizar
         </button>
     `;
@@ -233,38 +234,51 @@ function criarBotoesAcoes() {
 
 // FUNÇÃO DE CÁLCULO
 function calcularConversao() {
-    const valor = parseFloat(valorInput.value);
+    const raw = (valorInput.value || '').toString().trim();
+    const numberRegex = /^\d+(?:[\.,]\d+)?$/;
+    if (!numberRegex.test(raw)) {
+        mostrarNotificacao('Por favor, digite um valor numérico válido.', 'error');
+        valorInput.classList.add('input-error');
+        valorInput.focus();
+        return;
+    }
+
+    const valor = parseFloat(raw.replace(',', '.'));
     const moedaBase = moedaBaseSelect.value;
-    
+
     if (isNaN(valor) || valor <= 0) {
-        alert('Por favor, digite um valor válido maior que zero!');
+        mostrarNotificacao('Por favor, digite um valor válido maior que zero!', 'error');
+        valorInput.classList.add('input-error');
+        valorInput.focus();
         return;
     }
-    
+    valorInput.classList.remove('input-error');
+
     if (!moedaBase) {
-        alert('Por favor, selecione uma moeda base!');
+        mostrarNotificacao('Por favor, selecione uma moeda base!', 'error');
+        moedaBaseSelect.focus();
         return;
     }
-    
+
     if (!moedasData[moedaBase]) {
-        alert('Moeda base não encontrada!');
+        mostrarNotificacao('Moeda base não encontrada!', 'error');
         return;
     }
-    
+
     let resultadoHTML = `
         <h4>${currencyIcons[moedaBase] || '💱'} ${valor} ${moedasData[moedaBase].simbolo} equivale a:</h4>
         <div class="conversoes-lista">
     `;
-    
+
     const resultados = {};
-    
+
     Object.keys(moedasData).forEach(codigo => {
         if (codigo !== moedaBase) {
             const valorConvertido = converterMoeda(valor, moedaBase, codigo);
             const moeda = moedasData[codigo];
-            
+
             resultados[codigo] = formatarMoeda(valorConvertido, codigo);
-            
+
             resultadoHTML += `
                 <div class="conversao-resultado">
                     <span>${currencyIcons[codigo] || '💱'} ${moeda.nome} (${codigo}):</span>
@@ -273,11 +287,11 @@ function calcularConversao() {
             `;
         }
     });
-    
+
     resultadoHTML += `</div>`;
     resultadoCalculo.innerHTML = resultadoHTML;
     resultadoCalculo.classList.add('mostrar');
-    
+
     // Adicionar ao histórico
     adicionarAoHistorico(valor, moedaBase, resultados);
     animarAtualizacaoValor(resultadoCalculo);
@@ -288,17 +302,28 @@ function adicionarTarefa() {
     const codigoMoeda = taskInput.value.trim().toUpperCase();
     
     if (!codigoMoeda) {
-        alert('Por favor, digite um código de moeda!');
+        mostrarNotificacao('Por favor, digite um código de moeda!', 'error');
+        taskInput.classList.add('input-error');
+        taskInput.focus();
         return;
     }
-    
+
+    // Validate ISO-like 3-letter code
+    if (!/^[A-Z]{3}$/.test(codigoMoeda)) {
+        mostrarNotificacao('Código de moeda inválido. Use 3 letras (ex: USD).', 'error');
+        taskInput.classList.add('input-error');
+        taskInput.focus();
+        return;
+    }
+
     if (!moedasData[codigoMoeda]) {
-        alert(`Moeda "${codigoMoeda}" não encontrada! Tente: ${Object.keys(moedasData).join(', ')}`);
+        mostrarNotificacao(`Moeda "${codigoMoeda}" não encontrada! Tente: ${Object.keys(moedasData).join(', ')}`, 'error');
+        taskInput.classList.add('input-error');
         return;
     }
-    
+
     if (moedasSelecionadas.includes(codigoMoeda)) {
-        alert('Esta moeda já foi adicionada!');
+        mostrarNotificacao('Esta moeda já foi adicionada!', 'info');
         return;
     }
     
@@ -309,6 +334,11 @@ function adicionarTarefa() {
 
 // Renderizar lista de moedas
 function renderizarTarefas() {
+    // Performance: avoid full re-render if nothing meaningful changed
+    const key = JSON.stringify(moedasSelecionadas) + '|' + JSON.stringify(moedasFavoritas);
+    if (key === prevRenderKey) return;
+    prevRenderKey = key;
+
     taskList.innerHTML = '';
     
     if (moedasSelecionadas.length === 0) {
@@ -325,11 +355,11 @@ function renderizarTarefas() {
         moedaItem.className = 'moeda-card';
         moedaItem.setAttribute('data-currency', codigo);
         
-        moedaItem.innerHTML = `
+            moedaItem.innerHTML = `
             <div class="moeda-header">
                 <div class="moeda-titulo">
                     <button class="favorito-btn ${isFavorito ? 'ativo' : ''}" 
-                            onclick="toggleFavorito('${codigo}')">
+                            onclick="toggleFavorito('${codigo}')" aria-label="Favoritar ${codigo}" role="button">
                         ${isFavorito ? '⭐' : '☆'}
                     </button>
                     <div class="moeda-icon">${currencyIcons[codigo] || '💱'}</div>
@@ -338,7 +368,7 @@ function renderizarTarefas() {
                         <small>(${moeda.pais})</small>
                     </div>
                 </div>
-                <button class="button remove-btn" onclick="removerMoeda(${index})">Remover</button>
+                <button class="button remove-btn" onclick="removerMoeda(${index})" aria-label="Remover ${codigo}">Remover</button>
             </div>
             ${moedaCompleta ? `
                 <div class="moeda-info">
@@ -362,16 +392,25 @@ function renderizarTarefas() {
 function converterMoeda(valor, moedaOrigem, moedaDestino) {
     const origem = moedasData[moedaOrigem];
     const destino = moedasData[moedaDestino];
-    if (!origem || !destino) return 0;
-    const valorEmBRL = valor * origem.valor;
-    return valorEmBRL / destino.valor;
+    if (!origem || !destino) return NaN;
+    const origemValor = Number(origem.valor);
+    const destinoValor = Number(destino.valor);
+    if (!Number.isFinite(origemValor) || !Number.isFinite(destinoValor)) return NaN;
+    if (origemValor === 0 || destinoValor === 0) return NaN;
+    const valorEmBRL = valor * origemValor;
+    return valorEmBRL / destinoValor;
 }
 
 function formatarMoeda(valor, codigoMoeda) {
     const moeda = moedasData[codigoMoeda];
     if (!moeda) return 'N/A';
-    if (codigoMoeda === 'BTC' || valor < 0.01 || valor > 1000000) {
+    if (!Number.isFinite(valor) || isNaN(valor)) return 'Valor indisponível';
+    const abs = Math.abs(valor);
+    if (codigoMoeda === 'BTC' || abs < 0.01) {
         return `${moeda.simbolo} ${valor.toFixed(6)}`;
+    }
+    if (abs > 1e12) {
+        return `${moeda.simbolo} ${valor.toExponential(6)}`;
     }
     return `${moeda.simbolo} ${valor.toFixed(2)}`;
 }
@@ -424,7 +463,11 @@ function adicionarAoHistorico(valor, moedaOrigem, resultados) {
 }
 
 function salvarHistorico() {
-    localStorage.setItem('historicoConversao', JSON.stringify(historicoConversao));
+    try {
+        localStorage.setItem('historicoConversao', JSON.stringify(historicoConversao));
+    } catch (e) {
+        console.error('Storage error:', e);
+    }
 }
 
 function atualizarHistoricoUI() {
@@ -469,8 +512,11 @@ function toggleFavorito(codigoMoeda) {
         moedasFavoritas.splice(index, 1);
         mostrarNotificacao(`❌ ${codigoMoeda} removido dos favoritos`);
     }
-    
-    localStorage.setItem('moedasFavoritas', JSON.stringify(moedasFavoritas));
+    try {
+        localStorage.setItem('moedasFavoritas', JSON.stringify(moedasFavoritas));
+    } catch (e) {
+        console.error('Storage error:', e);
+    }
     renderizarTarefas();
 }
 
@@ -479,28 +525,59 @@ function toggleModoEscuro() {
     modoEscuro = !modoEscuro;
     document.body.classList.toggle('modo-escuro', modoEscuro);
     modoEscuroToggle.textContent = modoEscuro ? '☀️' : '🌙';
-    localStorage.setItem('modoEscuro', JSON.stringify(modoEscuro));
+    try {
+        localStorage.setItem('modoEscuro', JSON.stringify(modoEscuro));
+    } catch (e) {
+        console.error('Storage error:', e);
+    }
 }
 
 // API de Cotações (simulada)
 async function buscarCotacoesTempoReal() {
+    mostrarNotificacao('🔄 Atualizando cotações...', 'info');
+
+    // Primeiro, tentar buscar cotações reais da API
     try {
-        mostrarNotificacao('🔄 Atualizando cotações...');
-        
-        // Simular atualização de cotações
+        const response = await fetch('https://api.exchangerate-api.com/v4/latest/BRL');
+        if (response.ok) {
+            const data = await response.json();
+            const rates = data.rates || {};
+
+            Object.keys(moedasData).forEach(codigo => {
+                if (codigo === 'BRL') {
+                    moedasData[codigo].valor = 1;
+                } else if (rates[codigo] && rates[codigo] > 0) {
+                    // API retorna quanto 1 BRL vale na outra moeda (ex: rates.USD = 0.19 => 1 BRL = 0.19 USD)
+                    // Nosso formato espera quanto 1 [moeda] vale em BRL, então invertendo:
+                    moedasData[codigo].valor = 1 / rates[codigo];
+                }
+            });
+
+            mostrarNotificacao('✅ Cotações atualizadas (API)!', 'success');
+            salvarSnapshotCotacoes();
+            renderizarTarefas();
+            return;
+        } else {
+            console.warn('API retornou erro, usando simulação. Status:', response.status);
+        }
+    } catch (err) {
+        console.warn('Erro ao buscar da API, usando simulação.', err);
+    }
+
+    // Fallback: simular pequenas variações quando a API não estiver disponível
+    try {
         Object.keys(moedasData).forEach(codigo => {
             if (codigo !== 'BRL') {
-                // Variação aleatória de ±2%
                 const variacao = (Math.random() - 0.5) * 0.04;
                 moedasData[codigo].valor *= (1 + variacao);
             }
         });
-        
+
         setTimeout(() => {
-            mostrarNotificacao('✅ Cotações atualizadas!');
+            mostrarNotificacao('✅ Cotações atualizadas (simulação)!', 'success');
+            salvarSnapshotCotacoes();
             renderizarTarefas();
         }, 1000);
-        
     } catch (error) {
         console.error('Erro ao buscar cotações:', error);
         mostrarNotificacao('❌ Erro ao atualizar cotações');
@@ -510,24 +587,50 @@ async function buscarCotacoesTempoReal() {
 // Gráficos
 function inicializarGraficos() {
     const ctx = graficoEvolucao.getContext('2d');
-    
-    // Dados de exemplo
-    const labels = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'];
-    const datasets = moedasSelecionadas.slice(0, 4).map((codigo, index) => {
+
+    // Prefer historical snapshots (saved snapshots of rates) when available
+    const snapshots = JSON.parse(localStorage.getItem('cotacoesSnapshots') || '[]');
+    let labels = [];
+    let datasets = [];
+
+    if (snapshots && snapshots.length > 0) {
+        // Use up to last 30 snapshots
+        const recent = snapshots.slice(-30);
+        labels = recent.map(s => s.date);
+
+        const cores = ['#3498db', '#9b59b6', '#e74c3c', '#f1c40f', '#27ae60', '#f39c12'];
+
+        datasets = moedasSelecionadas.slice(0, 6).map((codigo, index) => {
+            const data = recent.map(s => {
+                const v = s.rates && s.rates[codigo];
+                return (typeof v === 'number') ? v : null;
+            });
+
+            return {
+                label: codigo,
+                data: data,
+                borderColor: cores[index % cores.length],
+                backgroundColor: cores[index % cores.length] + '20',
+                tension: 0.4,
+                fill: true
+            };
+        });
+    } else {
+        // Fallback: sample data similar to before (but limited)
+        labels = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'];
         const cores = ['#3498db', '#9b59b6', '#e74c3c', '#f1c40f'];
-        const valorBase = moedasData[codigo].valor;
-        
-        return {
-            label: codigo,
-            data: Array(6).fill().map((_, i) => 
-                valorBase * (0.95 + (Math.random() * 0.1))
-            ),
-            borderColor: cores[index],
-            backgroundColor: cores[index] + '20',
-            tension: 0.4,
-            fill: true
-        };
-    });
+        datasets = moedasSelecionadas.slice(0, 4).map((codigo, index) => {
+            const valorBase = moedasData[codigo] ? moedasData[codigo].valor : 1;
+            return {
+                label: codigo,
+                data: Array(6).fill().map((_, i) => valorBase * (0.95 + (Math.random() * 0.1))),
+                borderColor: cores[index],
+                backgroundColor: cores[index] + '20',
+                tension: 0.4,
+                fill: true
+            };
+        });
+    }
     
     // Destruir gráfico anterior se existir
     if (window.meuGrafico) {
@@ -557,6 +660,54 @@ function inicializarGraficos() {
     });
 }
 
+// Toast helper
+function showToast(message, type = 'success', timeout = 3500) {
+    const container = document.getElementById('toastContainer');
+    if (!container) return alert(message);
+
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    toast.textContent = message;
+    container.appendChild(toast);
+
+    setTimeout(() => {
+        toast.style.opacity = '0';
+        setTimeout(() => container.removeChild(toast), 300);
+    }, timeout);
+}
+
+// Replace default notification with toast
+function mostrarNotificacao(mensagem, tipo = 'info') {
+    showToast(mensagem, tipo === 'error' ? 'error' : (tipo === 'success' ? 'success' : 'info'));
+}
+
+// Save a daily snapshot of current rates (keeps last 30)
+function salvarSnapshotCotacoes() {
+    try {
+        const snapshots = JSON.parse(localStorage.getItem('cotacoesSnapshots') || '[]');
+        const today = new Date().toISOString().slice(0, 10);
+
+        if (snapshots.length && snapshots[snapshots.length - 1].date === today) return;
+
+        const snapshot = {
+            date: today,
+            rates: {}
+        };
+
+        Object.keys(moedasData).forEach(c => {
+            snapshot.rates[c] = Number(moedasData[c].valor) || null;
+        });
+
+        snapshots.push(snapshot);
+        // keep up to 90 days
+        const max = 90;
+        const trimmed = snapshots.slice(-max);
+        try { localStorage.setItem('cotacoesSnapshots', JSON.stringify(trimmed)); } catch (e) { console.error('Storage error:', e); }
+    } catch (e) {
+        console.error('Erro ao salvar snapshot:', e);
+    }
+}
+
 // Modal Functions
 function abrirModal(tipo) {
     if (tipo === 'historico') {
@@ -580,10 +731,6 @@ function animarAtualizacaoValor(elemento) {
     }, 600);
 }
 
-function mostrarNotificacao(mensagem) {
-    // Implementação simples de notificação
-    alert(mensagem); // Você pode substituir por um sistema de notificação mais elaborado
-}
 
 // Event Listeners
 addTaskBtn.addEventListener('click', adicionarTarefa);
@@ -620,13 +767,22 @@ window.addEventListener('click', function(event) {
 
 // Inicializar app quando DOM carregar
 document.addEventListener('DOMContentLoaded', function() {
-    carregarDadosMoedas();
-    
+    // Tentar carregar dados externos de `moedas.json`, se falhar usa os dados locais
+    fetch('moedas.json')
+        .then(response => response.json())
+        .then(data => {
+            carregarDadosMoedas(data);
+        })
+        .catch(err => {
+            console.warn('Não foi possível carregar moedas.json, usando dados locais.', err);
+            carregarDadosMoedas();
+        });
+
     // Aplicar modo escuro se estava ativo
     if (modoEscuro) {
         document.body.classList.add('modo-escuro');
         modoEscuroToggle.textContent = '☀️';
     }
-    
+
     console.log('Aplicativo inicializado com sucesso!');
 });
