@@ -761,10 +761,11 @@ body.modo-escuro .historico-item {
         justify-content: center;
     }
 }/* ===== CORES PERSONALIZADAS - ADICIONE ESTE CÓDIGO ===== */
+/* ===== CORES PERSONALIZADAS - ADICIONE ESTE CÓDIGO ===== */
 
 /* 1. TÍTULO PRINCIPAL */
 h2 {
-    color: #d8523d; /* Vermelho do seu tema - MUDE AQUI */
+    color: #d8523d; /* Tema principal */
     text-align: center;
     margin-bottom: 25px;
     font-size: 28px;
@@ -783,16 +784,16 @@ h2 {
     flex-wrap: wrap;
     justify-content: center;
     padding: 20px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* MUDE AQUI */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     border-radius: 12px;
-    border-left: 4px solid #d8523d; /* MUDE AQUI A COR DA BORDA */
+    border-left: 4px solid #d8523d;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     color: white;
 }
 
 /* 3. TÍTULO DA SEÇÃO DE MOEDAS */
 .todo-section h3 {
-    color: #d8523d; /* MUDE AQUI */
+    color: #d8523d;
     margin-bottom: 15px;
     font-size: 20px;
     display: flex;
@@ -815,32 +816,79 @@ h2 {
     gap: 8px;
 }
 
-.acao-btn.historico {
-    background: linear-gradient(45deg, #9b59b6, #8e44ad);
+.acao-btn.historico { background: linear-gradient(45deg, #9b59b6, #8e44ad); }
+.acao-btn.graficos  { background: linear-gradient(45deg, #e67e22, #d35400); }
+.acao-btn.atualizar { background: linear-gradient(45deg, #27ae60, #2ecc71); }
+/* Additional small-screen tweaks for better mobile responsiveness */
+@media (max-width: 480px) {
+    .container {
+        padding: 14px;
+    }
+    .calculadora-section .input-group,
+    .input-group {
+        flex-direction: column;
+        gap: 8px;
+    }
+    .moeda-card {
+        padding: 12px;
+    }
+    .moeda-icon {
+        font-size: 1.25rem;
+    }
+    .acao-btn, .button {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+    .conversoes-grid {
+        grid-template-columns: 1fr;
+    }
+    .moeda-info {
+        padding: 10px;
+    }
+    .moeda-descricao {
+        font-size: 13px;
+    }
 }
 
-.acao-btn.graficos {
-    background: linear-gradient(45deg, #e67e22, #d35400);
+/* Accessibility: Visible focus outlines for keyboard users */
+button:focus, .favorito-btn:focus, .acao-btn:focus, .button:focus {
+    outline: 3px solid rgba(216,82,61,0.25);
+    outline-offset: 2px;
 }
 
-.acao-btn.atualizar {
-    background: linear-gradient(45deg, #27ae60, #2ecc71);
-}
-h2 {
-    color: #27ae60;
-    background: linear-gradient(45deg, #27ae60, #2ecc71);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;      
+/* Ensure interactive elements have clear focus in dark mode too */
+body.modo-escuro button:focus, body.modo-escuro .favorito-btn:focus {
+    outline: 3px solid rgba(255, 235, 59, 0.18);
 }
 
-.acoes-container {
-    background: linear-gradient(45deg, #27ae60, #2ecc71);
-    border-left: 4px solid #d8523d;
+/* Toast styles (non-blocking notifications) */
+.toast-container {
+    position: fixed;
+    right: 20px;
+    top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 4000;
 }
-.todo-section h3 {
-    color: #27ae60;
-} 
-.acao-btn {
-    background: linear-gradient(45deg, #27ae60, #2ecc71);
+
+.toast {
+    background: rgba(0,0,0,0.85);
+    color: white;
+    padding: 10px 14px;
+    border-radius: 8px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+    min-width: 200px;
+    max-width: 360px;
+    animation: slideInRight 0.28s ease-out;
+}
+
+.toast.success { background: linear-gradient(90deg,#27ae60,#2ecc71); }
+.toast.error { background: linear-gradient(90deg,#e74c3c,#ff6b6b); }
+.toast.info { background: linear-gradient(90deg,#3498db,#2980b9); }
+
+/* Input validation visual feedback */
+.input-error {
+    border-color: #e74c3c !important;
+    box-shadow: 0 0 0 4px rgba(231,76,60,0.08);
 }
